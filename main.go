@@ -1,12 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"net"
+	"os"
 )
 
 var CanaryToken string
 
 func main() {
-	_, _ = net.LookupIP(fmt.Sprintf("%s.canarytokens.com", CanaryToken))
+	_, err := net.LookupIP(CanaryToken + ".canarytokens.com")
+	if err != nil {
+		os.Exit(1)
+	}
+	os.Exit(0)
 }
